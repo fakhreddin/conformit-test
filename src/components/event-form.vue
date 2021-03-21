@@ -55,8 +55,7 @@
     <br />
     <h3 style="">Nom du statu</h3>
     <Dropdown
-      v-model="statusName"
-      :value="statusName"
+      v-model="selectedStatus"
       :options="status"
       optionLabel="name"
       placeholder=""
@@ -80,9 +79,6 @@
 
 <script>
 export default {
-  /*     model:{
-        statusName:null
-    }, */
   name: "EventForm",
   props: {
     eventRecord: Object,
@@ -90,6 +86,7 @@ export default {
   watch: {
     eventRecord() {
       this.temoinsList = [...this.eventRecord.Témoins];
+      this.selectedStatus = { name: this.eventRecord.statusName };
     },
   },
   data() {
@@ -97,7 +94,8 @@ export default {
       involvedEmployee: { ...this.eventRecord.involvedEmployee },
       statusName: { ...this.eventRecord.statusName },
       temoinsList: { ...this.eventRecord.Témoins },
-      status: [{ name: "Opened" }, { name: "Closed" }, { name: "InProgress" }],
+      status: [{ name: "Open" }, { name: "Closed" }, { name: "InProgress" }],
+      selectedStatus: { name: this.eventRecord.statusName },
     };
   },
 };
